@@ -70,6 +70,10 @@ body {
     max-width: 64rem;
 }
 
+.container .narrow {
+    max-width: 56rem;
+}
+
 
 
 /*MEDIA QUERIES*/
