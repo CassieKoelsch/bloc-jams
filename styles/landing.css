@@ -4,7 +4,7 @@ body.landing {
 
 /*HERO CONTENT STYLES*/
 .hero-content {
-    position: relative; /* positioning will be explained in a resource */
+    position: relative; 
     min-height: 600px; /* hero content element must be _at least_ 600 pixels */
     background-image: url(../assets/images/bloc_jams_bg.jpg);
     background-repeat: no-repeat;
@@ -13,8 +13,8 @@ body.landing {
 }
 
 .hero-content .hero-title {
-    position: absolute;             /* positioning will be explained in a resource */
-    top: 40%;                       /* positioning will be explained in a resource */
+    position: absolute;             
+    top: 40%;                       
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -40,6 +40,16 @@ body.landing {
     position: relative;
     padding: 2rem;
     text-align: center;
+    opacity: 0;
+    -webkit-transform: scaleX(0.8) translateY(4rem);
+    -moz-transform: scaleX(0.8) translateY(4rem);
+    transform: scaleX(0.8) translateY(4rem);
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0.4s;
+    -moz-transition-delay: 0.4s;
+    transition-delay: 0.4s;
 }
 
 .point .point-title {
