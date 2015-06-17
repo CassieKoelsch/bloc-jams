@@ -78,7 +78,7 @@ body {
 
 /*MEDIA QUERIES*/
 
-/* Medium screens (640px) */
+/*Medium screens (640px) */
 @media (min-width: 40rem) {
     html { font-size: 112%; }
     
