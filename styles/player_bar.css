@@ -109,7 +109,7 @@
  
  .seek-bar .fill {
      background: white;
-     width: 36%;
+     width: 50%;
      height: 0.25rem;
      border-radius: 2px;
  }
@@ -125,9 +125,10 @@
      margin-top: -0.25rem;
      border-radius: 50%;
      cursor: pointer;
-     -webkit-transition: all 100ms ease-in-out;
-        -moz-transition: all 100ms ease-in-out;
-             transition: all 100ms ease-in-out;
+     transition: width 100ms ease-in-out,
+                 height 100ms ease-in-out,
+                 margin-top 100ms ease-in-out,
+                 margin-left 100ms ease-in-out;;
  }
  
  .seek-bar:hover .thumb {
