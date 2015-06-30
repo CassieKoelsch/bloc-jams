@@ -1,8 +1,12 @@
 var myAppModule = angular.module('myApp', ['ui.router']);
 
-myAppModule.config(function($stateProvider, $urlRouterProvider) {
+myAppModule.config(['$locationProvider','$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
     
-    $urlRouterProvider.otherwise('/');
+
+    $locationProvider.html5Mode({
+         enabled: true,
+         requireBase: false
+     });
     
     $stateProvider
         
@@ -18,4 +22,6 @@ myAppModule.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/collection.html'     
         });
         
-});
+    
+     $urlRouterProvider.otherwise('/');
+}]);
