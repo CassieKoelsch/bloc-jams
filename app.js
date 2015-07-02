@@ -9,21 +9,21 @@ myAppModule.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     
     $stateProvider
         
-        // HOME STATES AND NESTED VIEWS ========================================
+        // HOME STATES ============================================
         .state('home', {
             url: '/',
             controller: 'LandingController',
             templateUrl: 'views/landing.html'
         })
         
-        // COLLECTION PAGE =================================
+        // COLLECTION STATES =======================================
         .state('collection', {
             url: '/collection',
             controller: 'CollectionController',
             templateUrl: 'views/collection.html'     
         })
     
-        // COLLECTION PAGE =================================
+        // ALBUM STATES =============================================
         .state('album', {
             url: '/album',
             controller: 'AlbumController', 
@@ -34,7 +34,9 @@ myAppModule.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
      $urlRouterProvider.otherwise('/');
 }]);
 
-// LANDING CONTROLLER =================================
+
+
+// LANDING CONTROLLER ===================================================
 myAppModule.controller('LandingController', ['$scope', function ($scope) {
     $scope.heroTitle = 'Turn the music up!';
     
@@ -50,14 +52,17 @@ myAppModule.controller('LandingController', ['$scope', function ($scope) {
 }]);
 
 
-// COLLECTION CONTROLLER =================================
+
+// COLLECTION CONTROLLER ================================================
 myAppModule.controller('CollectionController', ['$scope', function($scope) {
 
     $scope.albums = [albumPicasso, albumKent, albumMarconi];
 
-
 }]);
 
+
+
+// ALBUM DATA ==========================================================
 // Example Album
 var albumPicasso = {
     name: 'The Colors',
@@ -105,7 +110,10 @@ var albumKent = {
         { name: 'Au coin du monde', length: '4:14'}
     ]
 };
-// ALBUM CONTROLLER =================================
+
+
+
+// ALBUM CONTROLLER ======================================================
 myAppModule.controller('AlbumController', ['$scope', function($scope) {
 
     $scope.currentAlbum = albumPicasso;
