@@ -12,7 +12,7 @@
             </section>
             <table class="album-view-song-list">
                 <tr class="album-view-song-item" ng-repeat="song in currentAlbum.songs">
-                    <td class="song-item-number" data-song-number="' + {{song.$index+1}} + '">{{song.$index+1}}</td>
+                    <td class="song-item-number" data-song-number="' + {{$index + 1}} + '">{{$index + 1}}</td>
                     <td class="song-item-title">{{song.name}}</td>
                     <td class="song-item-duration">{{song.length}}</td>
                 </tr>
