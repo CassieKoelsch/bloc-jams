@@ -1,7 +1,17 @@
 
-    <section class="album-covers container">
-        <div class="clearfix">
-            <p>Just Testing Views</p>
+    <section class="album-covers container" ng-controller="CollectionController">
+        <div class="collection-album-container column fourth" ng-repeat="albums in albums">
+          <img ng-src="{{albums.albumArtUrl}}"/>
+          <div class="collection-album-info caption">
+            <p>
+              <a class="album-name" ui-sref="album"> {{albums.name}} </a>
+              <br/>
+              <a ui-sref="album"> {{albums.artist}} </a>
+              <br/>
+              {{albums.songs.length}} songs
+              <br/>
+            </p>
+          </div>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
