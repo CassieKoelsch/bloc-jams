@@ -1,4 +1,4 @@
-  <div ng-controller="AlbumController">  
+  <div class="album" ng-controller="AlbumController">  
         <main class="album-view container narrow">
             <section class="clearfix">
                 <div class="column half">
@@ -14,7 +14,7 @@
                 <tr class="album-view-song-item" ng-repeat="song in album.songs" >
                 <td class="song-item-number" ng-mouseleave="mouseLeave($event)" ng-mouseover="mouseOver($event)" >
                     <a class="album-song-button" ng-click="play($index)" style="display: none" >
-                        <span class="ion-play" ></span>
+                        <span class="ion-play"></span>
                         <span class="ion-pause"></span>
                     </a>
                     
@@ -25,6 +25,6 @@
                 </tr>
             </table>
         </main>    
-</div>  
-<ng-include src = "'scripts/Services/player_bar.html'">
+      <ng-include src = "'scripts/Services/player_bar.html'">
         </ng-include>
+</div>  

@@ -8,37 +8,38 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
     $scope.player = SongPlayer;
     
     $scope.$on('myCustomEvent', function (event, data) {
-  console.log(data); // 'Data to send'
-});
-    
-    
-  $scope.$watch('progress', function(newValue, oldValue, scope) {
-    var file = SongPlayer.currentSoundFile;
-    if (file === null) return;
-    var newPercent = newValue * 100;
-    if(Math.abs(file.getPercent() - newPercent) > 1) file.setPercent(newPercent);
-  });
-
-  SongPlayer.addListener('timeupdate', function (event) {
-    $scope.$apply(function () {
-      $scope.progress = SongPlayer.getProgress();
+        console.log(data); // 'Data to send'
     });
-  });
+    
+    
+    $scope.$watch('progress', function(newValue, oldValue, scope) {
+        var file = SongPlayer.currentSoundFile;
+        if (file === null) return;
+        var newPercent = newValue * 100;
+        if(Math.abs(file.getPercent() - newPercent) > 1) file.setPercent(newPercent);
+    });
+
+    SongPlayer.addListener('timeupdate', function (event) {
+        $scope.$apply(function () {
+        $scope.progress = SongPlayer.getProgress();
+        });
+    });
     
     $scope.$watch('volume', function(newValue, oldValue, scope) {
         SongPlayer.setVolume(newValue * 100);
     });
       
-      $scope.previousSong = function() {
+    $scope.previousSong = function() {
         SongPlayer.previous(); 
         $scope.playing = true; 
-          SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
             var self = this;
-             $scope.$apply(function(){
-                 $scope.totalTime = self.getDuration();
+            $scope.$apply(function(){
+                $scope.totalTime = self.getDuration();
              });
          });
-        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+        
+    SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
             var self = this;
             $scope.$apply(function() {
                 $scope.currentTime = self.getTime();
@@ -64,27 +65,29 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
          });
     };
     
-        $scope.play = function(songNumber) {
+    
+    $scope.play = function(songNumber) {
         if(songNumber >= 0) {
-        SongPlayer.setSong(songNumber);
-       SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
-            var self = this;
-        $scope.$apply(function(){
-        $scope.totalTime = self.getDuration();
+            SongPlayer.setSong(songNumber);
+            SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+                var self = this;
+            $scope.$apply(function(){
+                $scope.totalTime = self.getDuration();
              });
         });
+            
          SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
             var self = this;
             $scope.$apply(function() {
                 $scope.currentTime = self.getTime();
-                });
+            });
          }); 
         } else {
            SongPlayer.play();
         }
         $scope.playing = true; 
                                          
- };
+    };
                                            
     $scope.pauseSong = function() {
         SongPlayer.pause();

@@ -12,14 +12,17 @@ myAppModule.service('SongPlayer', function () {
         volume: 80,
         currentSong: null,
         listeners: [],
+          //Play the currentSoundFile 
         play: function() {
 
           this.currentSoundFile.play();
         },
+          //Pause the currentSoundFile
         pause: function() {
 
           this.currentSoundFile.pause();
         },
+          //Set the song that is playing to current
         setSong: function(songNumber) {
 
           if (this.currentSoundFile) {
@@ -48,13 +51,14 @@ myAppModule.service('SongPlayer', function () {
             self.currentSoundFile.bind(listener[0], listener[1]);
           });
         },
-
+          //Set the volume
         setVolume: function(volume) {
           if (this.currentSoundFile) {
             this.currentSoundFile.setVolume(volume);
           }
           this.volume = volume;
         },
+          //Change the song when the next button is clicked
         next: function() {
 
           var currentTrack = this.songNumber ;
@@ -69,6 +73,7 @@ myAppModule.service('SongPlayer', function () {
           }
           this.setSong(currentTrack);
         },
+          //Change the song when the previous button is clicked
         previous: function() {
           var currentTrack = this.songNumber ;
           if (this.currentSoundFile) {
@@ -85,6 +90,7 @@ myAppModule.service('SongPlayer', function () {
         addListener: function(eventName, fn){
           this.listeners.push([eventName, fn]);
         },
+          //Get the current time and total time to set the seek bar 
         getProgress: function() {
             if(this.currentSoundFile) {
             return this.currentSoundFile.getTime() / this.currentSoundFile.getDuration();

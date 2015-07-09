@@ -1,5 +1,5 @@
-
-    <section class="album-covers container" ng-controller="CollectionController">
+<div class="collection" ng-controller="CollectionController">
+    <section class="album-covers container">
         <div class="collection-album-container column fourth" ng-repeat="albums in albums">
           <img ng-src="{{albums.albumArtUrl}}"/>
           <div class="collection-album-info caption">
@@ -14,6 +14,6 @@
           </div>
         </div>
     </section>
-<ng-include src = "'scripts/Services/player_bar.html'">
-        </ng-include>
-   
+    <ng-include src = "'scripts/Services/player_bar.html'">
+        </ng-include>  
+</div>
