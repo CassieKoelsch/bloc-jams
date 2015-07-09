@@ -9,21 +9,21 @@ myAppModule.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     
     $stateProvider
         
-        // HOME STATES ============================================
+        // HOME STATE ============================================
         .state('home', {
             url: '/',
             controller: 'LandingController',
             templateUrl: 'views/landing.html'
         })
         
-        // COLLECTION STATES =======================================
+        // COLLECTION STATE =======================================
         .state('collection', {
             url: '/collection',
             controller: 'CollectionController',
             templateUrl: 'views/collection.html'     
         })
     
-        // ALBUM STATES =============================================
+        // ALBUM STATE =============================================
         .state('album', {
             url: '/album',
             controller: 'AlbumController', 
@@ -36,29 +36,8 @@ myAppModule.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
 
 
 
-// LANDING CONTROLLER ===================================================
-myAppModule.controller('LandingController', ['$scope', function ($scope) {
-    $scope.heroTitle = 'Turn the music up!';
-    
-    $scope.albumImages = {
-    imageUrl: ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png', '07.png', '08.png', '09.png', '10.png', '11.png', '12.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png', '19.png', '20.png', '21.png']
-    };
-    
-  $scope.shuffle = function (o) {
-    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-  };
-
-}]);
 
 
-
-// COLLECTION CONTROLLER ================================================
-myAppModule.controller('CollectionController', ['$scope', function($scope) {
-
-    $scope.albums = [albumPicasso, albumKent, albumMarconi];
-
-}]);
 
 
 
@@ -113,14 +92,15 @@ var albumKent = {
 
 
 
-// ALBUM CONTROLLER ======================================================
-myAppModule.controller('AlbumController', ['$scope', function($scope) {
-
-    $scope.currentAlbum = albumPicasso;
-    
 
 
-}]);
+
+
+
+
+
+
+
 
 
 
