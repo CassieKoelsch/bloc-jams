@@ -1,63 +1,22 @@
-  <div ng-controller="AlbumController">  
-        <main class="album-view container narrow">
-            <section class="clearfix">
-                <div class="column half">
-                    <img ng-src="{{currentAlbum.albumArtUrl}}" class="album-cover-art">
-                </div>
-                <div class="album-view-details column half">
-                    <h2 class="album-view-title">{{currentAlbum.name}}</h2>
-                    <h3 class="album-view-artist">{{currentAlbum.artist}}</h3>
-                    <h5 class="album-view-release-info">{{currentAlbum.year}} {{currentAlbum.label}}</h5>
-                </div>
-            </section>
-            <table class="album-view-song-list">
-                <tr class="album-view-song-item" ng-repeat="song in currentAlbum.songs">
-                    <td class="song-item-number" data-song-number="' + {{$index + 1}} + '">{{$index + 1}}</td>
-                    <td class="song-item-title">{{song.name}}</td>
-                    <td class="song-item-duration">{{song.length}}</td>
-                </tr>
-            </table>
-        </main>
-        
-        <section class="player-bar">
-             <div class="container">
-                 <div class="player-bar-control-group left-controls">
-                     <a class="previous">
-                         <span class="ion-skip-backward"></span>
-                     </a>
-                     <a class="play-pause">
-                         <span class="ion-play"></span>
-                     </a>
-                     <a class="next">
-                         <span class="ion-skip-forward"></span>
-                     </a>
-                 </div>
-                 <div class="player-bar-control-group currently-playing">
-                    <h2 class="song-name"></h2>
-                    <h2 class="artist-song-mobile"></h2>
-                        <div class="seek-control">
-                         <div class="seek-bar">
-                             <div class="fill"></div>
-                             <div class="thumb"></div>
-                         </div>
-                         <div class="current-time">2:30</div>
-                         <div class="total-time">4:45</div>
-                        </div>
-                     <h3 class="artist-name"></h3>
-                 </div>
-                 <div class="player-bar-control-group right-controls">
-                     <div class="volume">
-                         <span class="ion-volume-high"></span>
-                         <div class="seek-bar">
-                             <div class="fill"></div>
-                             <div class="thumb"></div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
+<div class="album" ng-controller="AlbumController">  
+    <main class="album-view container narrow">
+        <section class="clearfix">
+            <div class="column half">
+                <img ng-src="{{currentAlbum.albumArtUrl}}" class="album-cover-art">
+            </div>
+            <div class="album-view-details column half">
+                <h2 class="album-view-title">{{currentAlbum.name}}</h2>
+                <h3 class="album-view-artist">{{currentAlbum.artist}}</h3>
+                <h5 class="album-view-release-info">{{currentAlbum.year}} {{currentAlbum.label}}</h5>
+            </div>
         </section>
-        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
-        <script src="scripts/fixtures.js"></script>
-        <script src="scripts/album.js"></script>
+        <table class="album-view-song-list">
+            <tr class="album-view-song-item" ng-repeat="song in currentAlbum.songs">
+                <td class="song-item-number" data-song-number="' + {{$index + 1}} + '">{{$index + 1}}</td>
+                <td class="song-item-title">{{song.name}}</td>
+                <td class="song-item-duration">{{song.length}}</td>
+            </tr>
+        </table>
+    </main>
+    <div ng-include="'/views/player_bar.html'"></div>
 </div>  
