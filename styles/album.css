@@ -48,6 +48,7 @@ div.album {
 
 .song-item-number {
     width: 5%;
+    padding: 3px;
 }
 
 .song-item-title {

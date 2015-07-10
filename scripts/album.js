@@ -1,14 +1,14 @@
-var createSongRow = function(songNumber, songName, songLength) {
-    
-    var template =
-       '<tr class="album-view-song-item">'
-     + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
-     + '  <td class="song-item-title">' + songName + '</td>'
-     + '  <td class="song-item-duration">' + songLength + '</td>'
-     + '</tr>'
-     ;
-
-    var $row = $(template);
+//var createSongRow = function(songNumber, songName, songLength) {
+//    
+//    var template =
+//       '<tr class="album-view-song-item">'
+//     + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
+//     + '  <td class="song-item-title">' + songName + '</td>'
+//     + '  <td class="song-item-duration">' + songLength + '</td>'
+//     + '</tr>'
+//     ;
+//
+//    var $row = $(template);
     
     var clickHandler = function() {
         
@@ -72,32 +72,32 @@ var createSongRow = function(songNumber, songName, songLength) {
     $row.find('.song-item-number').click(clickHandler);
     $row.hover(onHover, offHover);
     
-    return $row;
+//    return $row;
 
 };
 
-var setCurrentAlbum = function(album) {
-    
-        currentAlbum = album;
-
-        var $albumTitle = $('.album-view-title');
-        var $albumArtist = $('.album-view-artist');
-        var $albumReleaseInfo = $('.album-view-release-info');
-        var $albumImage = $('.album-cover-art');
-        var $albumSongList = $('.album-view-song-list');
-
-        $albumTitle.text(album.name);
-        $albumArtist.text(album.artist);
-        $albumReleaseInfo.text(album.year + ' ' + album.label);
-        $albumImage.attr('src', album.albumArtUrl);
-
-        $albumSongList.empty();
-
-        for (i = 0; i < album.songs.length; i++) {
-            var $newRow = createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
-             $albumSongList.append($newRow);
-    }
-};
+//var setCurrentAlbum = function(album) {
+//    
+//        currentAlbum = album;
+//
+//        var $albumTitle = $('.album-view-title');
+//        var $albumArtist = $('.album-view-artist');
+//        var $albumReleaseInfo = $('.album-view-release-info');
+//        var $albumImage = $('.album-cover-art');
+//        var $albumSongList = $('.album-view-song-list');
+//
+//        $albumTitle.text(album.name);
+//        $albumArtist.text(album.artist);
+//        $albumReleaseInfo.text(album.year + ' ' + album.label);
+//        $albumImage.attr('src', album.albumArtUrl);
+//
+//        $albumSongList.empty();
+//
+//        for (i = 0; i < album.songs.length; i++) {
+//            var $newRow = createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
+//             $albumSongList.append($newRow);
+//    }
+//};
 
 var updateSeekBarWhileSongPlays = function() {
 
@@ -331,8 +331,8 @@ var filterTimeCode = function (timeInSeconds) {
 // Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
-var playerBarPlayButton = '<span class="ion-play"></span>';
-var playerBarPauseButton = '<span class="ion-pause"></span>';
+//var playerBarPlayButton = '<span class="ion-play"></span>';
+//var playerBarPauseButton = '<span class="ion-pause"></span>';
 
  // Create variables in the global scope to hold current song/album information
 var currentAlbum = null;

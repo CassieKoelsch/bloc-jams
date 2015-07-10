@@ -114,13 +114,58 @@ var albumKent = {
 
 
 // ALBUM CONTROLLER ======================================================
-myAppModule.controller('AlbumController', ['$scope', function($scope) {
+myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
 
-    $scope.currentAlbum = albumPicasso;
+    $scope.player = SongPlayer;
     
-
+    //Show play button when mouse is over song number 
+    $scope.mouseOver = function($event) {
+        var td = $event.target;
+        $(td).find('div').hide();
+        $(td).find('a').show();
+        $(td).find('.ion-play').show();
+        $(td).find('.ion-pause').hide();
+    };
+    
+    //Show song number when mouse leaves play button 
+    $scope.mouseLeave = function($event) {
+        var td = $event.target;
+        $(td).find('div').show();
+        $(td).find('a').hide();
+        
+    };
+    
+    $scope.play = function($event, songNumber) {
+        
+        //Show pause button when play button is clicked 
+        var td = $event.target;
+        $(td).find('div').hide();
+        $(td).find('a').show();
+        $(td).find('.ion-play').hide();
+        $(td).find('.ion-pause').show();
+        
+    };
 
 }]);
 
 
+// PLAYERBAR CONTROLLER ======================================================
+myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function($scope, SongPlayer){
+    $scope.player = SongPlayer;
+    $scope.play = function () {
+        $scope.playing = true; 
+    };
+    $scope.pause = function () {
+        $scope.playing = false; 
+    };
+    
+}]);
 
+
+// SONGPLAYER SERVICE ======================================================
+myAppModule.service('SongPlayer', function(){
+    var currentAlbum = albumPicasso;
+    return {
+        currentAlbum : currentAlbum
+        }
+});
