@@ -1,9 +1,9 @@
-body.album {
+div.album {
     background-image: url(../assets/images/blurred_backgrounds/blur_bg_3.jpg);
     background-repeat: repeat-y;
     background-position: center center;
     background-size: cover;
-    padding-bottom: 150px;
+    padding-bottom: 200px;
 }
 
 .album-cover-art {
