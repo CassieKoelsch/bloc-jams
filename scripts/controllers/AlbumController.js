@@ -26,16 +26,20 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
     
     //Play the song when clicked and change play to pause button on song row and player bar
      $scope.play = function(songNumber) {
+
          
-        SongPlayer.setSong(songNumber);
+         SongPlayer.setSong(songNumber);
+         SongPlayer.playing = true;
 
          
  
 
 //         $scope.$broadcast('myCustomEvent', {
-//        someProp: 'Sending you an Object!' // send whatever you want
+//         SongPlayer.setSong(songNumber);
+//     
+//
 //         });
-//   
+   
      };
     
 
