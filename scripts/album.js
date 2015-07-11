@@ -49,28 +49,28 @@
         }
     };
  
-    var onHover = function(event) {
-        var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
- 
-        if (songNumber !== currentlyPlayingSongNumber) {
-            songNumberCell.html(playButtonTemplate);
-        }
-    };
- 
-    var offHover = function(event) {
-        var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
- 
-        if (songNumber !== currentlyPlayingSongNumber) {
-            songNumberCell.html(songNumber);
-        }
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
-
-    };
-    
-    $row.find('.song-item-number').click(clickHandler);
-    $row.hover(onHover, offHover);
+//    var onHover = function(event) {
+//        var songNumberCell = $(this).find('.song-item-number');
+//        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+// 
+//        if (songNumber !== currentlyPlayingSongNumber) {
+//            songNumberCell.html(playButtonTemplate);
+//        }
+//    };
+// 
+//    var offHover = function(event) {
+//        var songNumberCell = $(this).find('.song-item-number');
+//        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+// 
+//        if (songNumber !== currentlyPlayingSongNumber) {
+//            songNumberCell.html(songNumber);
+//        }
+//        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
+//
+//    };
+//    
+//    $row.find('.song-item-number').click(clickHandler);
+//    $row.hover(onHover, offHover);
     
 //    return $row;
 
@@ -329,8 +329,8 @@ var filterTimeCode = function (timeInSeconds) {
 };
 
 // Album button templates
-var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
-var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+//var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+//var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 //var playerBarPlayButton = '<span class="ion-play"></span>';
 //var playerBarPauseButton = '<span class="ion-pause"></span>';
 
