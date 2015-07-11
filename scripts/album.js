@@ -49,30 +49,30 @@
         }
     };
  
-    var onHover = function(event) {
-        var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
- 
-        if (songNumber !== currentlyPlayingSongNumber) {
-            songNumberCell.html(playButtonTemplate);
-        }
-    };
- 
-    var offHover = function(event) {
-        var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
- 
-        if (songNumber !== currentlyPlayingSongNumber) {
-            songNumberCell.html(songNumber);
-        }
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
-
-    };
-    
-    $row.find('.song-item-number').click(clickHandler);
-    $row.hover(onHover, offHover);
-    
-    return $row;
+//    var onHover = function(event) {
+//        var songNumberCell = $(this).find('.song-item-number');
+//        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+// 
+//        if (songNumber !== currentlyPlayingSongNumber) {
+//            songNumberCell.html(playButtonTemplate);
+//        }
+//    };
+// 
+//    var offHover = function(event) {
+//        var songNumberCell = $(this).find('.song-item-number');
+//        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+// 
+//        if (songNumber !== currentlyPlayingSongNumber) {
+//            songNumberCell.html(songNumber);
+//        }
+//        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
+//
+//    };
+//    
+//    $row.find('.song-item-number').click(clickHandler);
+//    $row.hover(onHover, offHover);
+//    
+//    return $row;
 
 };
 

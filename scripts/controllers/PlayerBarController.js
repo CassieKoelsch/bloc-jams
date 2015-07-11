@@ -7,8 +7,11 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
     $scope.currentTime = '--:--';
     $scope.player = SongPlayer;
     
-    $scope.$on('myCustomEvent', function (event, data) {
-        console.log(data); // 'Data to send'
+    $scope.$on('playSong', function (event, args) {
+        $scope.message = args.songNumber;
+        $scope.playing = true;
+        SongPlayer.setSong(args.songNumber);
+        console.log($scope.message);
     });
     
     
