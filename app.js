@@ -116,7 +116,7 @@ var albumKent = {
 
 // ALBUM CONTROLLER ======================================================
 myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
-
+    
     $scope.player = SongPlayer;
     
     //Show play button when mouse is over song number 
@@ -126,27 +126,27 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
         $(td).find('a').show();
         $(td).find('.ion-play').show();
         $(td).find('.ion-pause').hide();
+        
     };
     
     //Show song number when mouse leaves play button 
     $scope.mouseLeave = function($event) {
-        var td = $event.target;
-        $(td).find('div').show();
-        $(td).find('a').hide();
+    
+            var td = $event.target;
+            $(td).find('div').show();
+            $(td).find('a').hide();
         
     };
     
     //When play button is clicked on song row play song and change button to pause
     $scope.play = function($event, songNumber) {
 
-        
-        
         //Show pause button when play button is clicked 
         var td = $event.target;
-        $(td).find('div').hide();
-        $(td).find('a').show();
-        $(td).find('.ion-play').hide();
-        $(td).find('.ion-pause').show();
+        $(td).hide();
+        $(td).next().show();
+        
+         
         
         //Send song number playerbar
         $scope.$broadcast('playSong', 
@@ -160,21 +160,40 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
 
 // PLAYERBAR CONTROLLER ======================================================
 myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function($scope, SongPlayer){
+    
     $scope.player = SongPlayer;
+    
+    //When play button is clicked play song and change icon to pause
     $scope.play = function (songNumber) {
         
         $scope.playing = true; 
     };
+    
+    //When pause button is clicked pause song and change icon to play
     $scope.pause = function () {
         
         $scope.playing = false; 
     };
     
+    //Get song number when play is clicked on ablum song row
     $scope.$on('playSong', function (event, args) {
-        $scope.message = args.songNumber;
+        
         $scope.playing = true;
-        console.log($scope.message);
+        SongPlayer.setSong(args.songNumber);
+
     });
+    
+    //Play next song and change song name
+    $scope.nextSong = function() {
+        SongPlayer.next();
+        $scope.playing = true;
+    };
+    
+    //Play previous song and change song name
+    $scope.previousSong = function() {
+        SongPlayer.previous();
+        $scope.playing = true; 
+    };
     
 }]);
 
@@ -182,7 +201,43 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
 // SONGPLAYER SERVICE ======================================================
 myAppModule.service('SongPlayer', function(){
     var currentAlbum = albumPicasso;
+    var currentlyPlayingSongNumber;
+    
+    
     return {
-        currentAlbum : currentAlbum
+        currentAlbum: currentAlbum,
+        currentSong: null,
+        
+        setSong: function(songNumber) {
+            this.songNumber = songNumber;
+            this.currentSong = this.currentAlbum.songs[this.songNumber];
+            currentSongFromAlbum = currentAlbum.songs[songNumber];
+            currentlyPlayingSongNumber = this.songNumber;
+        },
+        
+        //Change the song when the next button is clicked
+        next: function() {
+
+          var currentTrack = this.songNumber ;
+
+
+          currentTrack++;
+
+          if (currentTrack >= currentAlbum.songs.length) {
+            currentTrack = 0;
+          }
+          this.setSong(currentTrack);
+        },
+        
+        previous: function() {
+          var currentTrack = this.songNumber ;
+
+          currentTrack--;
+
+          if (currentTrack < 0) {
+            currentTrack = currentAlbum.songs.length - 1;
+          }
+          this.setSong(currentTrack);
         }
+    }
 });

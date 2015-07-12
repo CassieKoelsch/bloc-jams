@@ -1,19 +1,19 @@
 <section class="player-bar" ng-controller="PlayerBarController">
      <div class="container">
          <div class="player-bar-control-group left-controls">
-             <a class="previous">
+             <a class="previous" ng-click="previousSong()">
                  <span class="ion-skip-backward"></span>
              </a>
              <a class="play-pause">
                  <span class="ion-play" ng-click="play()" ng-hide="playing"></span>
                  <span class="ion-pause" ng-click="pause()" ng-show="playing"></span>
              </a>
-             <a class="next">
+             <a class="next" ng-click="nextSong()">
                  <span class="ion-skip-forward"></span>
              </a>
          </div>
          <div class="player-bar-control-group currently-playing">
-            <h2 class="song-name"></h2>
+            <h2 class="song-name">{{player.currentSong.name}}</h2>
             <h2 class="artist-song-mobile">{{player.currentAlbum.artist}}</h2>
                 <div class="seek-control">
                  <div class="seek-bar">
