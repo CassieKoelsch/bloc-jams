@@ -7,11 +7,26 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
     $scope.currentTime = '--:--';
     $scope.player = SongPlayer;
     
+    //Get song number when play is clicked on ablum song row
     $scope.$on('playSong', function (event, args) {
-        $scope.message = args.songNumber;
+        
         $scope.playing = true;
         SongPlayer.setSong(args.songNumber);
-        console.log($scope.message);
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+            var self = this;
+            $scope.$apply(function(){
+                $scope.totalTime = self.getDuration();
+             });
+         });
+        
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+            var self = this;
+            $scope.$apply(function() {
+                $scope.currentTime = self.getTime();
+                });
+         });
+        
+
     });
     
     
@@ -42,7 +57,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
              });
          });
         
-    SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
             var self = this;
             $scope.$apply(function() {
                 $scope.currentTime = self.getTime();

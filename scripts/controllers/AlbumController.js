@@ -1,8 +1,8 @@
 // ALBUM CONTROLLER ======================================================
 myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
     
-//    $scope.totalTime = '-:--';
-//    $scope.currentTime = '-:--';
+    $scope.totalTime = '-:--';
+    $scope.currentTime = '-:--';
     $scope.album = SongPlayer.currentAlbum;
     $scope.player = SongPlayer;
     
@@ -24,26 +24,22 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
     };
     
     
-    //Play the song when clicked and change play to pause button on song row and player bar
-     $scope.play = function($event, songNumber) {
-
-        
-         
-         
-//         SongPlayer.setSong(songNumber);
+//When play button is clicked on song row play song and change button to pause
+    $scope.play = function($event, songNumber) {
 
         //Show pause button when play button is clicked 
         var td = $event.target;
-        $(td).find('div').hide();
-        $(td).find('a').show();
-        $(td).find('.ion-play').hide();
-        $(td).find('.ion-pause').show();
+        $(td).hide();
+        $(td).next().show();
+        
+         
         
         //Send song number playerbar
         $scope.$broadcast('playSong', 
                           { songNumber: songNumber });
         
-     };
+        
+    };
     
 
 
