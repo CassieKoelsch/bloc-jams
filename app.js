@@ -118,6 +118,8 @@ var albumKent = {
 myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
     
     $scope.player = SongPlayer;
+    $scope.totalTime = '-:--';
+    $scope.currentTime = '-:--';
     
     //Show play button when mouse is over song number 
     $scope.mouseOver = function($event) {
@@ -130,11 +132,12 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
     };
     
     //Show song number when mouse leaves play button 
-    $scope.mouseLeave = function($event) {
     
-            var td = $event.target;
-            $(td).find('div').show();
-            $(td).find('a').hide();
+    $scope.mouseLeave = function($event, index) {
+        
+                var td = $event.target;
+                $(td).find('div').show();
+                $(td).find('a').hide();     
         
     };
     
@@ -162,6 +165,27 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
 myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function($scope, SongPlayer){
     
     $scope.player = SongPlayer;
+    $scope.volume = SongPlayer.volume / 100;
+    $scope.progress = SongPlayer.getProgress();
+    $scope.totalTime = '--:--';
+    $scope.currentTime = '--:--';
+    
+    $scope.$watch('progress', function(newValue, oldValue, scope) {
+    var file = SongPlayer.currentSoundFile;
+    if (file === null) return;
+    var newPercent = newValue * 100;
+    if(Math.abs(file.getPercent() - newPercent) > 1) file.setPercent(newPercent);
+    });
+
+//    SongPlayer.addListener('timeupdate', function (event) {
+//        $scope.$apply(function () {
+//            $scope.progress = SongPlayer.getProgress();
+//        });
+//    });
+
+    $scope.$watch('volume', function(newValue, oldValue, scope) {
+        SongPlayer.setVolume(newValue * 100);
+    });
     
     //When play button is clicked play song and change icon to pause
     $scope.play = function (songNumber) {
@@ -180,6 +204,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
         
         $scope.playing = true;
         SongPlayer.setSong(args.songNumber);
+        
 
     });
     
@@ -187,12 +212,42 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
     $scope.nextSong = function() {
         SongPlayer.next();
         $scope.playing = true;
+        
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+            
+             $scope.$apply(function(){
+                 $scope.totalTime = this.getDuration();
+             });
+        });
+        
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+            
+            $scope.$apply(function() {
+                $scope.currentTime = this.getTime();
+                });
+         });
+ 
     };
     
     //Play previous song and change song name
     $scope.previousSong = function() {
         SongPlayer.previous();
         $scope.playing = true; 
+        
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+            
+             $scope.$apply(function(){
+                 $scope.totalTime = this.getDuration();
+             });
+         });
+        
+        SongPlayer.currentSoundFile.bind('timeupdate', function(event) {
+            
+            $scope.$apply(function() {
+                $scope.currentTime = this.getTime();
+                });
+         });
+        
     };
     
 }]);
@@ -207,19 +262,51 @@ myAppModule.service('SongPlayer', function(){
     return {
         currentAlbum: currentAlbum,
         currentSong: null,
+        currentSoundFile: null,
+        volume: 80,
+        listeners: [],
         
         setSong: function(songNumber) {
+            
+            if (this.currentSoundFile) {
+                this.currentSoundFile.stop();
+            }
+            
             this.songNumber = songNumber;
             this.currentSong = this.currentAlbum.songs[this.songNumber];
             currentSongFromAlbum = currentAlbum.songs[songNumber];
             currentlyPlayingSongNumber = this.songNumber;
+            console.log(currentlyPlayingSongNumber);
+            
+            if (this.currentSoundFile !== null){
+                this.listeners.forEach(function(listener){
+                    this.currentSoundFile.unbind(listener[0], listener[1]);
+                });
+            }
+
+            this.currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl,{
+                formats: ['mp3'],
+                preload: true
+            });
+            
+            this.currentSoundFile.setVolume(this.volume);
+            this.currentSoundFile.play();
+
+            this.listeners.forEach(function(listener){
+                this.currentSoundFile.bind(listener[0], listener[1]);
+            
+            });   
+            
         },
         
         //Change the song when the next button is clicked
         next: function() {
 
           var currentTrack = this.songNumber ;
-
+            
+          if (this.currentSoundFile) {
+                this.currentSoundFile.stop();
+            }
 
           currentTrack++;
 
@@ -232,12 +319,45 @@ myAppModule.service('SongPlayer', function(){
         previous: function() {
           var currentTrack = this.songNumber ;
 
+            
+          if (this.currentSoundFile) {
+             this.currentSoundFile.stop();
+          }
+            
           currentTrack--;
 
           if (currentTrack < 0) {
             currentTrack = currentAlbum.songs.length - 1;
           }
           this.setSong(currentTrack);
+        },
+        
+        play: function() {
+
+            this.currentSoundFile.play();
+        },
+        pause: function() {
+
+            this.currentSoundFile.pause();
+        },
+        //Set the Volume of the current song
+        setVolume: function(volume) {
+          if (this.currentSoundFile) {
+            this.currentSoundFile.setVolume(volume);
+          }
+          this.volume = volume;
+        },
+        
+        addListener: function(eventName, fn){
+          this.listeners.push([eventName, fn]);
+        },
+        
+        getProgress: function() {
+            if(this.currentSoundFile) {
+            return this.currentSoundFile.getTime() / this.currentSoundFile.getDuration();
+            } else {
+                return 0;
+            }
         }
     }
 });
