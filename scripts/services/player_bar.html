@@ -16,22 +16,16 @@
                     <h2 class="song-name">{{player.currentSong.name}}</h2>
                     <h2 class="artist-song-mobile">{{player.currentAlbum.artist}}</h2>
                         <div class="seek-control">
-                         <div class="seek-bar">
-                             <div class="fill"></div>
-                             <div class="thumb"></div>
-                         </div>
-                         <div class="current-time">{{currentTime}}</div>
-                         <div class="total-time">{{totalTime}}</div>
+                            <my-slider info='progress'></my-slider>
+                            <div class="current-time">{{currentTime}}</div>
+                            <div class="total-time">{{totalTime}}</div>
                         </div>
                      <h3 class="artist-name">{{player.currentAlbum.artist}}</h3>
                  </div>
                  <div class="player-bar-control-group right-controls">
                      <div class="volume">
+                         <my-slider info='volume'></my-slider>
                          <span class="ion-volume-high"></span>
-                         <div class="seek-bar">
-                             <div class="fill"></div>
-                             <div class="thumb"></div>
-                         </div>
                      </div>
                  </div>
              </div>
