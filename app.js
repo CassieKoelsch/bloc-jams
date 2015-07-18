@@ -91,8 +91,27 @@ var albumKent = {
 };
 
 
+// TIME FILTER ==========================================================
 
+myAppModule.filter('filterTime', function(){
 
+    return function(timeInSeconds){
+        
+        var time = parseFloat(timeInSeconds);
+    
+        var minutes = Math.floor(time / 60);
+        var seconds = Math.floor(time - minutes * 60);
+    
+        if (seconds < 10) {seconds = "0"+seconds;}
+        var time = minutes + ':' + seconds;
+        
+        if (isNaN(seconds)){
+            return '--:--';
+        }else{
+        return time;
+        }
+    };
+});
 
 
 
