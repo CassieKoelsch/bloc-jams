@@ -17,8 +17,8 @@
                     <h2 class="artist-song-mobile">{{player.currentAlbum.artist}}</h2>
                         <div class="seek-control">
                             <my-slider info='progress'></my-slider>
-                            <div class="current-time">{{currentTime}}</div>
-                            <div class="total-time">{{totalTime}}</div>
+                            <div class="current-time">{{currentTime | filterTime}}</div>
+                            <div class="total-time">{{totalTime | filterTime}}</div>
                         </div>
                      <h3 class="artist-name">{{player.currentAlbum.artist}}</h3>
                  </div>
