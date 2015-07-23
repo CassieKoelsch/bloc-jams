@@ -28,6 +28,13 @@ myAppModule.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
             url: '/album',
             controller: 'AlbumController', 
             templateUrl: 'views/album.html'     
+        })
+    
+        // METRICS STATE =============================================
+        .state('metrics', {
+            url: '/metrics',
+            controller: 'MetricsController', 
+            templateUrl: 'views/metrics.html'     
         });
         
     
