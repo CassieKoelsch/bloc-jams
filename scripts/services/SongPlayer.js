@@ -32,6 +32,7 @@ myAppModule.service('SongPlayer', function () {
           this.songNumber = songNumber;
           this.currentSong = this.currentAlbum.songs[this.songNumber];
           currentSongFromAlbum = currentAlbum.songs[songNumber];
+          this.currentlyPlayingSongNumber = songNumber;
 
           var self = this;
           if (this.currentSoundFile !== null){

@@ -29,6 +29,13 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
 
     });
     
+    //Change to pause icon when paused on song row
+    $scope.$on('pauseSong', function (event, args) {
+        $scope.playing = false;
+    
+    
+    });
+    
     
     $scope.$watch('progress', function(newValue, oldValue, scope) {
         var file = SongPlayer.currentSoundFile;
@@ -104,6 +111,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
            SongPlayer.play();
         }
         $scope.playing = true; 
+        
                                          
     };
                                            
