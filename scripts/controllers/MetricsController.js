@@ -1,5 +1,7 @@
-myAppModule.controller('MetricsController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+myAppModule.controller('MetricsController', ['$scope', 'SongPlayer', 'Metric', function($scope, SongPlayer, Metric) {
 
+    $scope.songs = Metric.listSongsPlayed();
+    
     
 
 }]);

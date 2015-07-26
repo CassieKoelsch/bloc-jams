@@ -1,5 +1,5 @@
 // ALBUM CONTROLLER ======================================================
-myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', 'Metric', function($scope, SongPlayer, Metric) {
     
     $scope.totalTime = '-:--';
     $scope.currentTime = '-:--';
@@ -38,6 +38,11 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', function($sco
         $scope.$broadcast('playSong', 
                           { songNumber: songNumber });
         
+        //Set song info in metrics
+        var songObj = SongPlayer.currentAlbum.songs[songNumber];
+        Metric.registerSongPlay(songObj);
+        console.log(Metric.songPlays);
+    
         
     };
     
