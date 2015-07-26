@@ -41,7 +41,7 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', 'Metric', fun
         //Set song info in metrics
         var songObj = SongPlayer.currentAlbum.songs[songNumber];
         Metric.registerSongPlay(songObj);
-        
+        console.log(Metric.songPlays);
     
         
     };

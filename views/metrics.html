@@ -1,6 +1,6 @@
 <div ng-controller="MetricsController">
     <h1>Songs Played Log</h1>
-    <div ng-repeat= "songs in songs">
+    <div ng-repeat= "songs in songs track by $index">
         <p>{{songs}}</p>
     </div>
 </div>
