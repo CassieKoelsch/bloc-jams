@@ -25,6 +25,8 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', 'Metric',
                 $scope.currentTime = self.getTime();
                 });
          });
+        var songObj = SongPlayer.currentAlbum.songs[args.songNumber];
+        Metric.registerSongPlay(songObj);
         
 
     });
@@ -71,6 +73,8 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', 'Metric',
                 });
          });
         $scope.$emit('previousNextFromPlayerBar',{});
+        var songObj = SongPlayer.currentAlbum.songs[SongPlayer.currentlyPlayingSongNumber];
+        Metric.registerSongPlay(songObj);
     };
     
     $scope.nextSong = function() {
@@ -90,6 +94,8 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', 'Metric',
                 });
          });
         $scope.$emit('previousNextFromPlayerBar',{});
+        var songObj = SongPlayer.currentAlbum.songs[SongPlayer.currentlyPlayingSongNumber];
+        Metric.registerSongPlay(songObj);
     };
     
     
