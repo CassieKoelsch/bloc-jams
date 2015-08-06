@@ -11,6 +11,7 @@ myAppModule.service('SongPlayer', function () {
         currentSoundFile: null,
         volume: 80,
         currentSong: null,
+        isPlaying: false,
         listeners: [],
           //Play the currentSoundFile 
         play: function() {
@@ -47,6 +48,7 @@ myAppModule.service('SongPlayer', function () {
           });
           this.currentSoundFile.setVolume(this.volume);
           this.currentSoundFile.play();
+          this.isPlaying = true;
 
           this.listeners.forEach(function(listener){
             self.currentSoundFile.bind(listener[0], listener[1]);
@@ -98,6 +100,15 @@ myAppModule.service('SongPlayer', function () {
             } else {
                 return 0;
             }
-        }
+        },
+          
+          updateSeekPercentage: function (seekBar, seekBarFillRatio){
+              var offsetXPercent = seekBarFillRatio * 100;
+              offsetXPercent = Math.max(0, offsetXPercent);
+              offsetXPercent = Math.min(100, offsetXPercent);
+              var percentageString = offsetXPercent + '%';
+              seekBar.getElementsByClassName('fill')[0].style.width = percentageString;
+              seekBar.getElementsByClassName('thumb')[0].style.left = percentageString;
+            }
       }
 });

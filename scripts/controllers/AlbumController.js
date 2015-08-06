@@ -1,5 +1,5 @@
 // ALBUM CONTROLLER ======================================================
-myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', 'Metric', function($scope, SongPlayer, Metric) {
+myAppModule.controller('AlbumController', ['$scope', '$interval', 'SongPlayer', 'Metric', function($scope, $interval, SongPlayer, Metric) {
     
     $scope.totalTime = '-:--';
     $scope.currentTime = '-:--';
@@ -38,8 +38,7 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', 'Metric', fun
         if (SongPlayer.currentlyPlayingSongNumber !== null && SongPlayer.currentlyPlayingSongNumber !== songNumber){
             // Show the song number in the row 
             var songCell = angular.element(document.querySelector('.selected'));
-            console.log(songCell);
-//            var td = $event.target;
+
             $(songCell).find('div').show();
             $(songCell).find('a').hide();
         
@@ -91,6 +90,94 @@ myAppModule.controller('AlbumController', ['$scope', 'SongPlayer', 'Metric', fun
         }
         
     };
+    
+    $scope.$on('playPauseFromPlayerBar', function (event, args) {
+        if (!SongPlayer.currentSoundFile.isPaused()){
+        
+            var songCell = angular.element(document.querySelector('.selected'));
+            $(songCell).find('div').hide();
+            $(songCell).find('a').show();
+            $(songCell).find('.ion-play').hide();
+            $(songCell).find('.ion-pause').show();  
+            
+        }else{
+            
+            var songCell = angular.element(document.querySelector('.selected'));
+            $(songCell).find('div').hide();
+            $(songCell).find('a').show();
+            $(songCell).find('.ion-play').show();
+            $(songCell).find('.ion-pause').hide();
+        
+        }
+    });
+    
+    $scope.$on('previousNextFromPlayerBar', function (event, args) {
+       
+        //Change all other rows to show song number 
+        var songCell = angular.element(document.querySelector('.selected'));
+
+        $(songCell).find('div').show();
+        $(songCell).find('a').hide();
+        
+        
+        var songNumber = SongPlayer.currentlyPlayingSongNumber
+        //Change selected class to new song 
+        $scope.selectedRow = songNumber;
+//        console.log($scope.selectedRow);
+        songCell = angular.element(document.querySelector('.selected'));
+
+
+        //Change new song icon to pause
+        
+        console.log(songCell);
+        $(songCell).find('div').hide();
+        $(songCell).find('a').show();
+        $(songCell).find('.ion-play').hide();
+        $(songCell).find('.ion-pause').show(); 
+        
+        
+    
+    });
+    
+    //Update playerbar while song plays
+        var playOrPause;
+        var runTime = function() {
+            playOrPause = $interval( function(){
+              if (SongPlayer.isPlaying){
+                $scope.currentTime = SongPlayer.currentSoundFile.getTime();
+                var seekBarFillRatio = SongPlayer.currentSoundFile.getTime() /          SongPlayer.currentSoundFile.getDuration();
+                var seekBar = document.querySelector('.seek-control .seek-bar');
+                SongPlayer.updateSeekPercentage(seekBar, seekBarFillRatio);        
+              } else if (!SongPlayer.isPlaying) {
+                $scope.stopTime();
+              }
+            }, 100);
+          };
+
+
+          $scope.stopTime = function(scope) {
+            $interval.cancel(playOrPause);
+          };
+
+
+          $scope.$watch(function(){
+            return SongPlayer.isPlaying; 
+          }, function(){
+            runTime(); 
+          });
+
+
+          $scope.$watch(function(){
+            if(SongPlayer.currentSoundFile){
+              return SongPlayer.currentSoundFile.isEnded();
+            } 
+          }, function(){ 
+            if (SongPlayer.currentSoundFile){
+              if (SongPlayer.currentSoundFile.isEnded()){
+                SongPlayer.isPlaying = false;
+              }
+            } 
+          });
 
 
 }]);
