@@ -1,5 +1,5 @@
 // PLAYER_BAR CONTROLLER ======================================================
-myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', 'Metric', function($scope, SongPlayer, Metric) {
    
     $scope.volume = SongPlayer.volume / 100;
     $scope.progress = SongPlayer.getProgress();
@@ -70,6 +70,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
                 $scope.currentTime = self.getTime();
                 });
          });
+        $scope.$emit('previousNextFromPlayerBar',{});
     };
     
     $scope.nextSong = function() {
@@ -88,6 +89,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
                 $scope.currentTime = self.getTime();
                 });
          });
+        $scope.$emit('previousNextFromPlayerBar',{});
     };
     
     
@@ -111,6 +113,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
            SongPlayer.play();
         }
         $scope.playing = true; 
+        $scope.$emit('playPauseFromPlayerBar',{});
         
                                          
     };
@@ -118,6 +121,7 @@ myAppModule.controller('PlayerBarController', ['$scope', 'SongPlayer', function(
     $scope.pauseSong = function() {
         SongPlayer.pause();
         $scope.playing = false;
+        $scope.$emit('playPauseFromPlayerBar',{});
 
     }; 
    
