@@ -1,6 +1,16 @@
 <div ng-controller="MetricsController">
-    <h1>Songs Played Log</h1>
-    <div ng-repeat= "songs in songs track by $index">
-        <p>{{songs}}</p>
+    <div class="log">
+        <h2>Songs Played</h2>
+        <div class="chart">
+
+            <angular-chart options="options"></angular-chart>
+        </div>
+    
+    
+        <h2>Songs Played Log</h2>
+        <div ng-repeat= "songs in songs track by $index">
+            <p>{{songs}}</p>
+
+        </div>
     </div>
 </div>

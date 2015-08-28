@@ -74,7 +74,15 @@ body {
     max-width: 56rem;
 }
 
+.chart {
+    background: #fff;
+    max-width: 75%;
+    margin: auto;
+}
 
+.log h2, .log p {
+    margin-left: 150px;
+}
 
 /*MEDIA QUERIES*/
 

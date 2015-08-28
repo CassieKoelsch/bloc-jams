@@ -8,11 +8,12 @@ myAppModule.service('Metric', ['$rootScope', function($rootScope) {
             // Add time to event register
             songObj['playedAt'] = new Date();
             $rootScope.songPlays.push(songObj);
+            console.log(songObj);
         },
         listSongsPlayed: function() {
             var songs = [];
             angular.forEach($rootScope.songPlays, function(song) {
-                songs.push(song.name);
+                songs.push(song.name, song.playedAt);
             });
             return songs;
         }

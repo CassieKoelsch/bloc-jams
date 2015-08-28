@@ -60,8 +60,8 @@ myAppModule.controller('AlbumController', ['$scope', '$interval', 'SongPlayer', 
                               { songNumber: songNumber });
 
             //Set song info in metrics
-            var songObj = SongPlayer.currentAlbum.songs[songNumber];
-            Metric.registerSongPlay(songObj);
+//            var songObj = SongPlayer.currentAlbum.songs[songNumber];
+//            Metric.registerSongPlay(songObj);
             
         
         }else if (SongPlayer.currentlyPlayingSongNumber === songNumber) {
