@@ -1,4 +1,4 @@
-var myAppModule = angular.module('myApp', ['ui.router']);
+var myAppModule = angular.module('myApp', ['ui.router', 'angularChart']);
 
 myAppModule.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
     
